@@ -16,15 +16,17 @@ datasource db {
 model Employee {
     id       String       @id @default(uuid())
     name      String  
-    department     String
-    agency String
+    department     String // Finance & Admin | Quality Food Safety | Purchasing | Facitilies & Management | Operations | Human Resources | Occupational Health & Safety | Production
+    agency String // Organic | Inorganic | Supplier | Visitor
+    remarks String // In | Out | Official Business
     Attendance Attendance[]
 }
 
 model Attendance {
   id String       @id @default(uuid())
-  time_in DateTime @db.Date
+  time_in DateTime? @db.Date
   time_out DateTime? @db.Date
   official_business DateTime? @db.Date
+  
   employee_id Employee @relation(fields: [id], references: [id])
 }
